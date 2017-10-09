@@ -34,6 +34,6 @@ setup(name='python-sqlite-cache',
       classifiers=CLASSIFIERS,
       keywords=KEYWORDS,
       zip_safe=True,
-      install_requires=['sqlite3'],
+      install_requires=[''],
       py_modules=['python-sqlite-cache']
 )
