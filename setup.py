@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import sys
-import app
+import sqlite_cache
 
 from setuptools import setup, find_packages
 
@@ -24,10 +24,10 @@ CLASSIFIERS = [
 KEYWORDS = 'sqlite cache'
 
 setup(name='python-sqlite-cache',
-      version=app.__version__,
+      version=sqlite_cache.__version__,
       description="""SQLite cache for Python.""",
       long_description=open('README.md').read(),
-      author=app.__author__,
+      author=sqlite_cache.__author__,
       url='https://github.com/csotelo/python-sqlite-cache',
       packages=find_packages(),
       download_url='http://pypi.python.org/python-sqlite-cache/',
