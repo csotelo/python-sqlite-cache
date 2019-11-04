@@ -107,7 +107,7 @@ class SqliteCache:
 
                 expire = row[1]
                 if expire == 0 or expire > time():
-                    return_value = loads(str(row[0]))
+                    return_value = loads(row[0])
                     # TODO: Delete the value that is expired?
 
                 break
