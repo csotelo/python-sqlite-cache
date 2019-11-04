@@ -133,7 +133,7 @@ class SqliteCache:
 
         # serialize the value with protocol 2
         # ref: https://docs.python.org/2/library/pickle.html#data-stream-format
-        data = buffer(dumps(value, 2))
+        data = memoryview(dumps(value, 2))
 
         # write the updated value to the db
         with self._get_conn() as conn:
@@ -151,7 +151,7 @@ class SqliteCache:
 
         # serialize the value with protocol 2
         # ref: https://docs.python.org/2/library/pickle.html#data-stream-format
-        data = buffer(dumps(value, 2))
+        data = memoryview(dumps(value, 2))
 
         # adding a new entry that may cause a duplicate key
         # error if they key already exists. In this case
