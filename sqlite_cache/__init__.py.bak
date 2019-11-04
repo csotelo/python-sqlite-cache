@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from . import sqlite_cache
+
+__author__ = "Carlos Eduardo Sotelo Pinto"
+__copyright__ = ("Copyright 2017; ",)
+
+__credits__ = ["Carlos Eduardo Sotelo Pinto"]
+__version__ = "0.0.1"
+
+__all__ = ["SqliteCache"]
