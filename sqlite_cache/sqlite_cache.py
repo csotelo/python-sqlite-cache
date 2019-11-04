@@ -55,7 +55,7 @@ class SqliteCache:
                 logger.debug('Successfully created the storage path for {path}'.format(
                     path=self.path))
 
-            except OSError, e:
+            except OSError as e:
 
                 if e.errno != errno.EEXIST or not os.path.isdir(self.path):
                     raise
