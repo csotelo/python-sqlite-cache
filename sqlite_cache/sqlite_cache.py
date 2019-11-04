@@ -35,27 +35,30 @@ class SqliteCache:
     _clear_sql = 'DELETE FROM entries'
 
     # other properties
+    path = None
     connection = None
 
-    def __init__(self, path):
+    def __init__(self, path=None):
 
         """ Inits a new SqliteCache instance """
 
-        self.path = os.path.abspath(path)
-        logger.debug('Instantiated with cache_db path as {path}'.format(
-            path=self.path))
+        if path is not None:
 
-        # prepare the directory for the cache sqlite db
-        try:
-
-            os.mkdir(self.path)
-            logger.debug('Successfully created the storage path for {path}'.format(
+            self.path = os.path.abspath(path)
+            logger.debug('Instantiated with cache_db path as {path}'.format(
                 path=self.path))
 
-        except OSError, e:
+            # prepare the directory for the cache sqlite db
+            try:
 
-            if e.errno != errno.EEXIST or not os.path.isdir(self.path):
-                raise
+                os.mkdir(self.path)
+                logger.debug('Successfully created the storage path for {path}'.format(
+                    path=self.path))
+
+            except OSError, e:
+
+                if e.errno != errno.EEXIST or not os.path.isdir(self.path):
+                    raise
 
     def _get_conn(self):
 
@@ -65,10 +68,14 @@ class SqliteCache:
             return self.connection
 
         # specify where we want the cache db to live
-        cache_db_path = os.path.join(self.path, 'cache.sqlite')
+        if self.path is not None:
+            cache_db_path = os.path.join(self.path, 'cache.sqlite')
 
         # setup the connection
-        conn = sqlite3.Connection(cache_db_path, timeout=60)
+        if self.path is None:
+            conn = sqlite3.Connection(":memory:")
+        else:
+            conn = sqlite3.Connection(cache_db_path, timeout=60)
         logger.debug('Connected to {path}'.format(path=cache_db_path))
 
         # ensure that the table schema is available. The
